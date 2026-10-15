@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projectFilters: { label: string; group: ProjectGroup | "All" }[] = [
   { label: "All work", group: "All" }, { label: "Shopify", group: "Shopify" },
-  { label: "WordPress", group: "WordPress" }, { label: "Custom web", group: "Custom" }, { label: "Other", group: "Other" },
+  { label: "WordPress", group: "WordPress" }, { label: "Custom web", group: "Custom" },
 ];
 
 const words = "I build thoughtful digital storefronts and websites, from custom Shopify sections to the small details that keep a live site running smoothly.".split(" ");
@@ -324,7 +324,8 @@ function App() {
   }, [ready]);
 
   useLayoutEffect(() => {
-    if (!root.current || !ready || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!root.current || !ready) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setNameFilled(true); return; }
     const context = gsap.context(() => {
       const intro = gsap.timeline({ defaults: { ease: "expo.out" } });
       intro.fromTo(".hero-gridline", { scaleY: 0 }, { scaleY: 1, duration: .65, stagger: .035, transformOrigin: "top" })
@@ -415,3 +416,5 @@ function App() {
 }
 
 export default App;
+
+
